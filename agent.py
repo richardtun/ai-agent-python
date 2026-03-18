@@ -5,13 +5,38 @@ import json
 from openai import OpenAI
 import logging
 
-logging.basicConfig(
-    level=logging.INFO,  # change to DEBUG for more detail
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    datefmt="%H:%M:%S"
+# logging.basicConfig(
+#     level=logging.INFO,  # change to DEBUG for more detail
+#     format="%(asctime)s [%(levelname)s] %(message)s",
+#     datefmt="%H:%M:%S"
+# )
+
+# logger = logging.getLogger(__name__)
+
+# ========== LOGGING CONFIG ==========
+logger = logging.getLogger("ai_agent")
+logger.setLevel(logging.DEBUG)  # highest level, filter in handler
+
+# general format
+formatter = logging.Formatter(
+    "%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-logger = logging.getLogger(__name__)
+# ---- Log console ----
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)  # only show INFO and higher
+console_handler.setFormatter(formatter)
+
+# ---- Log file ----
+file_handler = logging.FileHandler("agent.log", encoding="utf-8")
+file_handler.setLevel(logging.DEBUG)  # write full in file
+file_handler.setFormatter(formatter)
+
+# ---- Add handler in logger ----
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+# ===================================
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
