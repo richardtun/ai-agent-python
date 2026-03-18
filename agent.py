@@ -4,6 +4,7 @@ import os
 import json
 from openai import OpenAI
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 # logging.basicConfig(
 #     level=logging.INFO,  # change to DEBUG for more detail
@@ -28,10 +29,22 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)  # only show INFO and higher
 console_handler.setFormatter(formatter)
 
-# ---- Log file ----
-file_handler = logging.FileHandler("agent.log", encoding="utf-8")
-file_handler.setLevel(logging.DEBUG)  # write full in file
+
+# ---- Daily Rotating File Handler ----
+file_handler = TimedRotatingFileHandler(
+    filename="agent.log",
+    when="midnight",     # rotate at 00:00
+    interval=1,          # each day
+    backupCount=7,       # keep 7 days for old logs
+    encoding="utf-8"
+)
+
+file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
+
+# Suffix for old file log
+file_handler.suffix = "%Y-%m-%d"
+
 
 # ---- Add handler in logger ----
 logger.addHandler(console_handler)
