@@ -1,10 +1,10 @@
 # Simple AI Task Agent
 
-# import os
-# import json
-# from openai import OpenAI
+import os
+import json
+from openai import OpenAI
 
-# client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 class Memory:
@@ -55,36 +55,36 @@ class Reasoner:
         else:
             return "unknown"
 
-# class GPTReasoner:
-#     def decide(self, user_input):
-#         prompt = f"""
-# You are AI agent manage job.
-
-# Duty:
-# - Analyse user's request
-# - Response JSON with the following format:
-
-# {{ 
-# "action": "add | list | remove | unknown",
-# "task": "task's content if any",
-# "index": number if remove
-# }}
-
-# Just response the JSON, no explaination.
-
-# User request:
-# "{user_input}"
-# """
-
-#         response = client.chat.completions.create(
-#             model="gpt-4o-mini",
-#             messages=[{"role": "user", "content": prompt}],
-#             temperature=0
-#         )
-
-#         return json.loads(response.choices[0].message.content)
-
 class GPTReasoner:
+    def decide(self, user_input):
+        prompt = f"""
+You are AI agent manage job.
+
+Duty:
+- Analyse user's request
+- Response JSON with the following format:
+
+{{ 
+"action": "add | list | remove | unknown",
+"task": "task's content if any",
+"index": number if remove
+}}
+
+Just response the JSON, no explaination.
+
+User request:
+"{user_input}"
+"""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0
+        )
+
+        return json.loads(response.choices[0].message.content)
+
+class MockGPTReasoner:
     """
     Mock GPT Reasoner
     Simulate GPT no need to call API
@@ -129,11 +129,24 @@ class AIAgent:
     def __init__(self):
         self.memory = Memory()
         self.actions = Actions(self.memory)
-        self.reasoner = GPTReasoner()
+        # self.reasoner = GPTReasoner()
+        
+        self.primary_reasoner = GPTReasoner()
+        self.fallback_reasoner = MockGPTReasoner()
+
 
     def run(self, user_input):
-        
-        decision = self.reasoner.decide(user_input)
+        try:
+            decision = self.primary_reasoner.decide(user_input)
+            print("🧠 GPT Reasoner used")
+
+        except Exception as e:
+            print("⚠️ GPT error, switch to Mock GPT")
+            print("Reason:", str(e))
+
+            decision = self.fallback_reasoner.decide(user_input)
+
+        # decision = self.reasoner.decide(user_input)
 
         action = decision.get("action")
 
