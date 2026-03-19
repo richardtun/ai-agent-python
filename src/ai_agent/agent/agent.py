@@ -1,7 +1,7 @@
-from logger import logger
-from agent.memory import Memory
-from agent.actions import Actions
-from agent.reasoner import GPTReasoner, MockGPTReasoner
+from ai_agent.logger import logger
+from ai_agent.agent.memory import Memory
+from ai_agent.agent.actions import Actions
+from ai_agent.agent.reasoner import GPTReasoner, MockGPTReasoner
 
 class AIAgent:
     def __init__(self):

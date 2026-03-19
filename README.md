@@ -4,17 +4,23 @@ AI Task Agent (Python)
 A modular AI task management agent built with Python.
 The agent is designed with a clear separation of responsibilities, fallback mechanism, and production-style logging, suitable as a portfolio project.
 
-✨ Features
+# ✨ Features
 
 ✅ Parse natural language user input
+
 ✅ Decide actions via Reasoner (GPT / Mock GPT fallback)
+
 ✅ Execute actions (add / list / remove tasks)
+
 ✅ In-memory task storage
+
 ✅ Robust fallback when GPT fails
+
 ✅ Structured logging with daily log rotation
+
 ✅ Clean, professional Python project structure
 
-🧠 Architecture Overview
+# 🧠 Architecture Overview
 User Input
    ↓
 Reasoner (GPT → Mock fallback)
@@ -26,7 +32,7 @@ Action Execution
 Memory Update
 
 
-Core components:
+# Core components:
 
 - AIAgent: Orchestrates the agent lifecycle
 - Reasoner:
@@ -39,7 +45,8 @@ Core components:
     - Daily rotating file logs (DEBUG level)
 
 
-Project Structure
+# Project Structure
+
 ai-agent-python/
 ├── README.md
 ├── requirements.txt
@@ -61,31 +68,38 @@ ai-agent-python/
 └── tests/
 
 This structure follows industry best practices:
-    - Clear entry point
-    - Modular responsibilities
-    - Absolute imports
-    - Easy scalability
+   - Clear entry point
+   - Modular responsibilities
+   - Absolute imports
+   - Easy scalability
 
 
-⚙️ Setup & Run
+# ⚙️ Setup & Run
 
 1️⃣ Clone repository
-git clone https://github.com/your-username/ai-agent-python
+
+git clone https://github.com/richardtun/ai-agent-python
+
 cd ai-agent-python
 
 2️⃣ Create & activate virtual environment
+
 python -m venv .venv
+
 source .venv/bin/activate   # Linux / macOS / Codespaces
-# .venv\Scripts\activate    # Windows
+
+.venv\Scripts\activate    # Windows
 
 3️⃣ Install dependencies
+
 pip install -r requirements.txt
 
 4️⃣ Run the agent
+
 python src/ai_agent/main.py
 
 
-📄 Logging
+# 📄 Logging
 - Logs are displayed on the console (INFO level)
 - Detailed logs are written to agent.log
 - Log files rotate daily
@@ -94,18 +108,23 @@ python src/ai_agent/main.py
 Log files are excluded from version control via .gitignore
 
 
-🧩 Skills Demonstrated
+# 🧩 Skills Demonstrated
 This project demonstrates:
 
 ✅ Python fundamentals (OOP, modules, imports)
+
 ✅ Clean project structuring (src/ layout)
+
 ✅ Virtual environments & dependency management
+
 ✅ AI agent design pattern (Reasoning → Action → Memory)
+
 ✅ Error handling & graceful fallback strategies
+
 ✅ Production-style logging configuration
 
 
-🚀 Future Improvements
+# 🚀 Future Improvements
 
 - Persist memory using file or database
 - Multi-step planning agent
@@ -114,6 +133,8 @@ This project demonstrates:
 - Dockerization
 
 
-👤 Author
+# 👤 Author
+
 Richard Tun
+
 GitHub: https://github.com/richardtun
