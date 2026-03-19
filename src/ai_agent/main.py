@@ -1,5 +1,5 @@
-from logger import logger
-from agent.agent import AIAgent
+from ai_agent.logger import logger
+from ai_agent.agent.agent import AIAgent
 
 def main():
     logger.info("AI Agent started")
