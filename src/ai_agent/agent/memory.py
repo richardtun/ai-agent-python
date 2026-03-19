@@ -2,12 +2,12 @@ class Memory:
     def __init__(self):
         self.tasks = []
 
-    def add_task(self, task):
+    def add(self, task):
         self.tasks.append(task)
 
-    def remove_task(self, index):
+    def remove(self, index):
         if 0 <= index < len(self.tasks):
             self.tasks.pop(index)
 
-    def list_tasks(self):
+    def all(self):
         return self.tasks

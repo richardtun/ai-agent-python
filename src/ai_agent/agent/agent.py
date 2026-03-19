@@ -39,17 +39,17 @@ class AIAgent:
 
         if action == "add":
             logger.info("Action: ADD task")
-            return self.actions.add_task(decision.get("task"))
+            return self.actions.add(decision.get("task"))
 
         elif action == "list":
             logger.info("Action: LIST tasks")
-            return self.actions.list_tasks()
+            return self.actions.all()
 
         elif action == "remove":
             try:
                 index = decision.get("index", 1) - 1
                 logger.info(f"Action: REMOVE task at index {index}")
-                return self.actions.remove_task(index)
+                return self.actions.remove(index)
             except Exception as e:
                 logger.error(f"Failed to remove task: {e}")
                 return "❌ Cannot remove task"
@@ -57,3 +57,7 @@ class AIAgent:
         else:
             logger.warning("Unknown action requested")
             return "❓ Not understand your request."
+        
+    
+    def get_tasks(self) -> list[str]:
+        return self.memory.all()

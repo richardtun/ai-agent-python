@@ -26,3 +26,12 @@ class AgentResponse(BaseModel):
 def run_agent(req: AgentRequest):
     result = agent.run(req.message)
     return AgentResponse(response=result)
+
+
+class TasksResponse(BaseModel):
+    tasks: list[str]
+
+@app.get("/tasks", response_model=TasksResponse)
+def get_tasks():
+    tasks = agent.get_tasks()
+    return TasksResponse(tasks=tasks)
