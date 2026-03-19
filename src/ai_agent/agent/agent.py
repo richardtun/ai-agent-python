@@ -61,3 +61,7 @@ class AIAgent:
     
     def get_tasks(self) -> list[str]:
         return self.memory.all()
+    
+    def reset(self):
+        self.memory.reset()
+

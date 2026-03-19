@@ -35,3 +35,17 @@ class TasksResponse(BaseModel):
 def get_tasks():
     tasks = agent.get_tasks()
     return TasksResponse(tasks=tasks)
+
+
+class ResetResponse(BaseModel):
+    status: str
+    message: str
+
+
+@app.post("/reset", response_model=ResetResponse)
+def reset_agent():
+    agent.reset()
+    return ResetResponse(
+        status="ok",
+        message="Agent state has been reset"
+    )

@@ -11,3 +11,6 @@ class Memory:
 
     def all(self):
         return self.tasks
+        
+    def reset(self):
+        self.tasks.clear()
