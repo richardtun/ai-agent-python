@@ -1,2 +1,3 @@
-agent.log
-agent.log*
+.venv/
+__pycache__/
+*.log*
